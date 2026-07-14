@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { Router, type NextFunction, type Request, type Response } from "express";
 import { insertPuzzle } from "../db/database.js";
 import { HttpError } from "../middleware/errorHandler.js";
-import { puzzlesGeneratedCounter } from "./metrics.js";
+import { puzzlesGeneratedCounter } from "../metrics/registry.js";
 import { generatePuzzle } from "../services/sudokuGenerator.js";
 import { Difficulty, type Puzzle, type PuzzleResponse } from "../types.js";
 
