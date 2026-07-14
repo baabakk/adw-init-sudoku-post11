@@ -1,8 +1,9 @@
-import express, { type NextFunction, type Request, type Response } from "express";
+import express from "express";
 import { getDb } from "./db/database.js";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
+import { metricsMiddleware } from "./middleware/metrics.js";
 import { healthRouter } from "./routes/health.js";
-import { httpRequestDuration, metricsRouter } from "./routes/metrics.js";
+import { metricsRouter } from "./routes/metrics.js";
 import { puzzleRouter } from "./routes/puzzle.js";
 import { validateRouter } from "./routes/validate.js";
 
@@ -10,14 +11,7 @@ const app = express();
 const PORT = Number(process.env.PORT ?? 4001);
 
 app.use(express.json());
-
-app.use((req: Request, res: Response, next: NextFunction) => {
-  const stopTimer = httpRequestDuration.startTimer({ method: req.method, route: req.path });
-  res.on("finish", () => {
-    stopTimer({ status: String(res.statusCode) });
-  });
-  next();
-});
+app.use(metricsMiddleware);
 
 app.use(healthRouter);
 app.use(metricsRouter);
