@@ -5,7 +5,7 @@ import { Difficulty } from "@init-sudoku-post11/contracts";
 
 const DB_PATH = process.env.SCORES_DB_PATH ?? path.join(__dirname, "..", "scores-service.db");
 
-const db = new Database(DB_PATH);
+const db: Database.Database = new Database(DB_PATH);
 db.pragma("journal_mode = WAL");
 
 db.exec(`

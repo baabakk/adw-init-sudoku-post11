@@ -1,5 +1,23 @@
-// scores-service — Scores Service
-// Scope: Persists completed-game results in its own SQLite database and serves a per-difficulty top-10 leaderboard.
-// Owns: packages/scores-service
-// This team builds its slice here each phase.
-export {};
+import express from "express";
+import "./database.js";
+import scoresRouter from "./routes/scores.js";
+import leaderboardRouter from "./routes/leaderboard.js";
+import healthRouter from "./routes/health.js";
+import metricsRouter from "./routes/metrics.js";
+import { errorHandler } from "./middleware/errorHandler.js";
+
+const app = express();
+const PORT = Number(process.env.PORT ?? 4001);
+
+app.use(express.json());
+
+app.use(healthRouter);
+app.use(metricsRouter);
+app.use(scoresRouter);
+app.use(leaderboardRouter);
+
+app.use(errorHandler);
+
+app.listen(PORT, () => {
+  console.log(`scores-service listening on port ${PORT}`);
+});
