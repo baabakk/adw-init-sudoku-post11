@@ -1,0 +1,8 @@
+{
+  "name": "@init-sudoku-post11/scores-service",
+  "version": "0.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@init-sudoku-post11/contracts": "*"
+  }
+}
