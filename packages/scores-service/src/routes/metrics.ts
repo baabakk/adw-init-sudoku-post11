@@ -20,6 +20,21 @@ export const scoreSubmissionCounter = new client.Counter({
   registers: [registry],
 });
 
+export const httpRequestDurationHistogram = new client.Histogram({
+  name: "scores_service_http_request_duration_seconds",
+  help: "Duration of HTTP requests in seconds, labeled by method, route, and status code.",
+  labelNames: ["method", "route", "status"] as const,
+  buckets: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5],
+  registers: [registry],
+});
+
+export const httpErrorCounter = new client.Counter({
+  name: "scores_service_http_errors_total",
+  help: "Total number of HTTP requests that resulted in a 4xx or 5xx response.",
+  labelNames: ["method", "route", "status"] as const,
+  registers: [registry],
+});
+
 router.get("/metrics", (_req: Request, res: Response, next: NextFunction) => {
   registry
     .metrics()

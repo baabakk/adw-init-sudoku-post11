@@ -4,6 +4,8 @@ import type { ErrorResponse } from "@init-sudoku-post11/contracts";
 /**
  * Express error-handling middleware (must be registered last, after all routes).
  * Normalizes any thrown/forwarded error into the shared ErrorResponse shape.
+ * The metrics middleware observes the resulting 500 response via the response
+ * "finish" event, so error counting is not duplicated here.
  */
 export function errorHandler(
   err: unknown,
