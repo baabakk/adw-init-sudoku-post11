@@ -1,7 +1,7 @@
+import { Difficulty } from "@init-sudoku-post11/contracts";
 import type {
   Board,
   CellError,
-  Difficulty,
   ErrorResponse,
   Puzzle,
   PuzzleResponse,
@@ -9,10 +9,10 @@ import type {
   ValidateResponse,
 } from "@init-sudoku-post11/contracts";
 
+export { Difficulty };
 export type {
   Board,
   CellError,
-  Difficulty,
   ErrorResponse,
   Puzzle,
   PuzzleResponse,

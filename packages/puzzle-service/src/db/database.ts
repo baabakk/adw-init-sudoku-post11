@@ -1,22 +1,7 @@
 import Database from "better-sqlite3";
 import path from "node:path";
+import { applySchema } from "./schema.js";
 import type { Board, Difficulty, Puzzle, PuzzleRow } from "../types.js";
-
-/**
- * Mirrors db/migrations/001_create_puzzles_table.sql. Inlined so the schema
- * is applied from the compiled output without shipping the .sql file alongside dist.
- */
-const CREATE_PUZZLES_TABLE = `
-  CREATE TABLE IF NOT EXISTS puzzles (
-    puzzleId TEXT PRIMARY KEY,
-    difficulty TEXT NOT NULL,
-    solutionBoard TEXT NOT NULL,
-    hintBoard TEXT NOT NULL,
-    generatedAt TEXT NOT NULL
-  );
-
-  CREATE INDEX IF NOT EXISTS idx_puzzles_difficulty ON puzzles (difficulty);
-`;
 
 const DEFAULT_DB_PATH = path.join(process.cwd(), "puzzle-service.db");
 
@@ -27,7 +12,7 @@ export function getDb(): Database.Database {
     const dbPath = process.env.PUZZLE_DB_PATH ?? DEFAULT_DB_PATH;
     db = new Database(dbPath);
     db.pragma("journal_mode = WAL");
-    db.exec(CREATE_PUZZLES_TABLE);
+    applySchema(db);
   }
   return db;
 }
