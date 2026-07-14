@@ -1,0 +1,28 @@
+.container {
+  max-width: 480px;
+  margin: 2rem auto 0;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  text-transform: capitalize;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.error {
+  color: #c53030;
+  text-align: center;
+}
