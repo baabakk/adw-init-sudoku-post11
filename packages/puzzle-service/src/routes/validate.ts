@@ -1,7 +1,7 @@
 import { Router, type NextFunction, type Request, type Response } from "express";
 import { getPuzzleById } from "../db/database.js";
 import { HttpError } from "../middleware/errorHandler.js";
-import { validationsCounter } from "./metrics.js";
+import { validationsCounter } from "../metrics/registry.js";
 import { isWellFormedBoard, validateBoard } from "../services/sudokuValidator.js";
 import type { ValidateRequest, ValidateResponse } from "../types.js";
 
