@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import "./App.css";
 import { DifficultySelector } from "./components/DifficultySelector";
 import { Board } from "./components/Board";
 import { ValidationResult } from "./components/ValidationResult";
